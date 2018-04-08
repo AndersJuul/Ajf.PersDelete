@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersDelete", "PersDelete.csproj", "{63500AA5-9523-4D72-B954-B0736DA714AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.PersDelete", "Ajf.PersDelete\Ajf.PersDelete.csproj", "{63500AA5-9523-4D72-B954-B0736DA714AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
