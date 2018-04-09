@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace PersDelete
 {
@@ -10,10 +11,17 @@ namespace PersDelete
             var path = GetArg(args, "-p", "c:\\temp");
             var pattern = GetArg(args, "-m", "*.*");
             var age = Convert.ToInt32(GetArg(args, "-a", "7"));
+            var keep = Convert.ToInt32(GetArg(args, "-k", "0"));
+
 
             var threshold = DateTime.Now.AddDays(-age);
 
-            var files = Directory.EnumerateFiles(path, pattern);
+            var files = Directory
+                .EnumerateFiles(path, pattern)
+                .ToArray();
+
+            if (files.Length < keep)
+                return;
 
             foreach (var file in files)
             {
