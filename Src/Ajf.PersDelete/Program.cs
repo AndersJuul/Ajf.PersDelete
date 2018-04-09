@@ -9,7 +9,7 @@ namespace PersDelete
         {
             var path = GetArg(args, "-p", "c:\\temp");
             var pattern = GetArg(args, "-m", "*.*");
-            var age =Convert.ToInt32( GetArg(args, "-a", "7"));
+            var age = Convert.ToInt32(GetArg(args, "-a", "7"));
 
             var threshold = DateTime.Now.AddDays(-age);
 
@@ -17,7 +17,7 @@ namespace PersDelete
 
             foreach (var file in files)
             {
-                var creationTIme =File.GetCreationTime(file);
+                var creationTIme = File.GetCreationTime(file);
 
                 if (creationTIme < threshold)
                 {

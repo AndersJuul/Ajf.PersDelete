@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PersDelete")]
+[assembly: AssemblyTitle("Ajf.PersDelete")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PersDelete")]
+[assembly: AssemblyProduct("Ajf.PersDelete")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("63500aa5-9523-4d72-b954-b0736da714ae")]
+[assembly: Guid("3e4aad80-4b02-4a34-b5a8-f43250f9c291")]
 
 // Version information for an assembly consists of the following four values:
 //
