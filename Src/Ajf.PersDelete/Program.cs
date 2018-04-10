@@ -42,7 +42,7 @@ namespace PersDelete
             {
                 if (files.Length <= keep)
                 {
-                    Log.Logger.Debug("Less files than required to keep.");
+                    Log.Logger.Debug("Less (or equal) number of files than required to keep.");
                     return;
                 }
 
