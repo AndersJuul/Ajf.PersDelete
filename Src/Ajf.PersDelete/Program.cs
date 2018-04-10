@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ajf.Nuget.Logging;
+using Serilog;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -8,44 +10,56 @@ namespace PersDelete
     {
         static void Main(string[] args)
         {
+            Log.Logger = StandardLoggerConfigurator
+                .GetLoggerConfig().MinimumLevel
+                .Debug()
+                .CreateLogger();
+
+            Log.Logger.Debug("Started...");
+
             var path = GetArg(args, "-p", "c:\\temp");
             var pattern = GetArg(args, "-m", "*.*");
             var age = Convert.ToInt32(GetArg(args, "-a", "7"));
             var keep = Convert.ToInt32(GetArg(args, "-k", "0"));
+
+            Log.Logger.Debug("Args: ... ",path);
+            Log.Logger.Debug("Args: ... ",pattern);
+            Log.Logger.Debug("Args: ... ",age);
+            Log.Logger.Debug("Args: ... ",keep);
 
 
             var threshold = DateTime.Now.AddDays(-age);
 
             var files = Directory
                 .EnumerateFiles(path, pattern)
-                .OrderBy(x=>x)
+                .Select(x=> new FileAndDate(x, File.GetCreationTime(x)))
+                .OrderBy(fd=>fd.DateTime)
                 .ToArray();
+
+            Log.Logger.Debug("Found files: ... ", files.Length);
 
             while (files.Length>0)
             {
                 if (files.Length < keep)
-                    return;
+                {
+                    Log.Logger.Debug("Less files than required to keep.");
+                        return;
+                }
 
                 var file = files.First();
 
-                var creationTIme = File.GetCreationTime(file);
-
-                if (creationTIme < threshold)
+                if (file.DateTime< threshold)
                 {
-                    Console.WriteLine("Deleting " + file);
-                    File.Delete(file);
+                    Log.Logger.Debug("Deleting " + file.FileName);
+                    File.Delete(file.FileName);
                 }
                 else
                 {
-                    Console.WriteLine("NOT Deleting " + file);
+                    Log.Logger.Debug("NOT Deleting " + file.FileName);
+                    Log.Logger.Debug("Oldest file is not old enough to be deleted.");
                     return;
                 }
                 files = files.Skip(1).ToArray();
-            }
-
-
-            foreach (var file in files)
-            {
             }
         }
 
