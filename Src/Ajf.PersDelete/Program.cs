@@ -22,10 +22,10 @@ namespace PersDelete
             var age = Convert.ToInt32(GetArg(args, "-a", "7"));
             var keep = Convert.ToInt32(GetArg(args, "-k", "0"));
 
-            Log.Logger.Debug("Args: ... " + path);
-            Log.Logger.Debug("Args: ... " + pattern);
-            Log.Logger.Debug("Args: ... " + age);
-            Log.Logger.Debug("Args: ... " + keep);
+            Log.Logger.Debug("Args: ... Path=" + path);
+            Log.Logger.Debug("Args: ... Pattern=" + pattern);
+            Log.Logger.Debug("Args: ... Age=" + age);
+            Log.Logger.Debug("Args: ... Keep=" + keep);
 
 
             var threshold = DateTime.Now.AddDays(-age);
@@ -40,7 +40,7 @@ namespace PersDelete
 
             while (files.Length > 0)
             {
-                if (files.Length < keep)
+                if (files.Length <= keep)
                 {
                     Log.Logger.Debug("Less files than required to keep.");
                     return;
