@@ -18,13 +18,16 @@ namespace PersDelete
 
             var files = Directory
                 .EnumerateFiles(path, pattern)
+                .OrderBy(x=>x)
                 .ToArray();
 
-            if (files.Length < keep)
-                return;
-
-            foreach (var file in files)
+            while (files.Length>0)
             {
+                if (files.Length < keep)
+                    return;
+
+                var file = files.First();
+
                 var creationTIme = File.GetCreationTime(file);
 
                 if (creationTIme < threshold)
@@ -35,7 +38,14 @@ namespace PersDelete
                 else
                 {
                     Console.WriteLine("NOT Deleting " + file);
+                    return;
                 }
+                files = files.Skip(1).ToArray();
+            }
+
+
+            foreach (var file in files)
+            {
             }
         }
 
