@@ -22,33 +22,33 @@ namespace PersDelete
             var age = Convert.ToInt32(GetArg(args, "-a", "7"));
             var keep = Convert.ToInt32(GetArg(args, "-k", "0"));
 
-            Log.Logger.Debug("Args: ... ",path);
-            Log.Logger.Debug("Args: ... ",pattern);
-            Log.Logger.Debug("Args: ... ",age);
-            Log.Logger.Debug("Args: ... ",keep);
+            Log.Logger.Debug("Args: ... " + path);
+            Log.Logger.Debug("Args: ... " + pattern);
+            Log.Logger.Debug("Args: ... " + age);
+            Log.Logger.Debug("Args: ... " + keep);
 
 
             var threshold = DateTime.Now.AddDays(-age);
 
             var files = Directory
                 .EnumerateFiles(path, pattern)
-                .Select(x=> new FileAndDate(x, File.GetCreationTime(x)))
-                .OrderBy(fd=>fd.DateTime)
+                .Select(x => new FileAndDate(x, File.GetCreationTime(x)))
+                .OrderBy(fd => fd.DateTime)
                 .ToArray();
 
             Log.Logger.Debug("Found files: ... ", files.Length);
 
-            while (files.Length>0)
+            while (files.Length > 0)
             {
                 if (files.Length < keep)
                 {
                     Log.Logger.Debug("Less files than required to keep.");
-                        return;
+                    return;
                 }
 
                 var file = files.First();
 
-                if (file.DateTime< threshold)
+                if (file.DateTime < threshold)
                 {
                     Log.Logger.Debug("Deleting " + file.FileName);
                     File.Delete(file.FileName);
